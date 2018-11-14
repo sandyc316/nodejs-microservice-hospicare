@@ -1,0 +1,178 @@
+version: '2'
+
+services:
+    
+    patient_app:
+        image: patient_nodeapi
+        #build: .
+        volumes:
+            - ./patient-services/config:/opt/app/config
+            - ./patient-services/io:/opt/app/io
+            - ./patient-services/modules:/opt/app/modules
+            - ./patient-services/package.json:/opt/app/package.json
+            
+        command: nodemon --legacy-watch io/api.js
+        #entrypoint: ./patient_entrypoint.sh
+        ports:
+            - "3002:3000"
+        depends_on:
+            - db
+        environment:
+            - PGHOST=db
+            - PGDATABASE=postgres
+            - PGUSER=postgres
+        # env_file:
+        #     - ./Docker/env
+        networks:
+            webnet:
+                aliases:
+                    - patient_app
+
+
+    doctor_app:
+        image: doctor_nodeapi
+        #build: .
+        volumes:
+            - ./doctor-services/config:/opt/app/config
+            - ./doctor-services/io:/opt/app/io
+            - ./doctor-services/modules:/opt/app/modules
+            - ./doctor-services/package.json:/opt/app/package.json
+            
+        command: nodemon --legacy-watch io/api.js
+        #entrypoint: ./doctor_entrypoint.sh
+        ports:
+            - "3001:3000"
+        depends_on:
+            - db
+            - appointment_app
+        environment:
+            - PGHOST=db
+            - PGDATABASE=postgres
+            - PGUSER=postgres
+        # env_file:
+        #     - ./Docker/env
+        networks:
+            webnet:
+                aliases:
+                    - doctor_app
+
+    appointment_app:
+        image: appointment_nodeapi
+        #build: .
+        volumes:
+            - ./appointment-services/config:/opt/app/config
+            - ./appointment-services/io:/opt/app/io
+            - ./appointment-services/modules:/opt/app/modules
+            - ./appointment-services/package.json:/opt/app/package.json
+            
+        command: nodemon --legacy-watch io/api.js
+        #entrypoint: ./appointment_entrypoint.sh
+        ports:
+            - "3003:3000"
+        depends_on:
+            - db
+        environment:
+            - PGHOST=db
+            - PGDATABASE=postgres
+            - PGUSER=postgres
+        # env_file:
+        #     - ./Docker/env
+        networks:
+            webnet:
+                aliases:
+                    - appointment_app
+
+    appointment_home_app:
+        image: appt_at_home_nodeapi
+        #build: .
+        volumes:
+            - ./appointment-at-home-services/config:/opt/app/config
+            - ./appointment-at-home-services/io:/opt/app/io
+            - ./appointment-at-home-services/modules:/opt/app/modules
+            - ./appointment-at-home-services/package.json:/opt/app/package.json
+            
+        command: nodemon --legacy-watch io/api.js
+        #entrypoint: ./appointment_home_entrypoint.sh
+        ports:
+            - "3000:3000"
+        depends_on:
+            - db
+            - doc_schedule_app
+        environment:
+            - PGHOST=db
+            - PGDATABASE=postgres
+            - PGUSER=postgres
+        # env_file:
+        #     - ./Docker/env
+        networks:
+            webnet:
+                aliases:
+                    - appointment_home_app
+
+
+    doc_schedule_app:
+        image: doc_schedule_nodeapi
+        #build: .
+        volumes:
+            - ./doctor-schedule-services/config:/opt/app/config
+            - ./doctor-schedule-services/io:/opt/app/io
+            - ./doctor-schedule-services/modules:/opt/app/modules
+            - ./doctor-schedule-services/package.json:/opt/app/package.json
+            
+        command: nodemon --legacy-watch io/api.js
+        #entrypoint: ./appointment_home_entrypoint.sh
+        ports:
+            - "3004:3000"
+        depends_on:
+            - db
+            - doctor_app
+        environment:
+            - PGHOST=db
+            - PGDATABASE=postgres
+            - PGUSER=postgres
+        # env_file:
+        #     - ./Docker/env
+        networks:
+            webnet:
+                aliases:
+                    - doc_schedule_app
+
+
+    db:
+        image: postgres:9.6.2-alpine
+        ports: ["5433:5432"]
+        environment:
+           POSTGRES_USER: postgres
+           POSTGRES_DB: familycare
+        read_only: true
+        tmpfs:
+            - /tmp
+            - /var/run/postgresql
+        volumes:
+            - db:/var/lib/postgresql/data
+        networks:
+            webnet:
+                aliases:
+                    - db
+
+    rabbit_mq:
+       image: rabbitmq:3.6
+       restart: "always"
+       ports:
+           - "15672"
+           - "5672"
+       environment:
+           - "RABBITMQ_DEFAULT_PASS=rabbitmq"
+           - "RABBITMQ_DEFAULT_USER=rabbitmq"
+           - "RABBITMQ_DEFAULT_VHOST=vhost"
+       networks:
+           webnet:
+               aliases:
+                   - rabbit
+
+
+networks:
+    webnet:
+
+volumes:
+    db:

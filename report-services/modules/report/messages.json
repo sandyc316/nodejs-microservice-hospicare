@@ -1,0 +1,19 @@
+{
+   
+    "ADDED_SUCCESSFULLY": {
+        "message": "Report uploaded successfully.",
+        "status": 200
+    }, 
+    "UPDATED_SUCCESSFULLY": {
+        "message": "Report uploaded successfully.",
+        "status": 200
+    },
+    "REPORT_UPLOAD_FAILED": {
+        "message": "Unable to upload the report.",
+        "status": 405
+    }, 
+    "INVALID_REPORT": {
+        "message": "Report should be image or pdf file.",
+        "status": 422
+    }
+}

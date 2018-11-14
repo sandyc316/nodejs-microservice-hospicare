@@ -1,0 +1,49 @@
+version: '2'
+
+services:
+    
+    report_app:
+        build: .
+        volumes:
+            - ./config:/opt/app/config
+            - ./io:/opt/app/io
+            - ./modules:/opt/app/modules
+            - ./package.json:/opt/app/package.json
+            
+        command: nodemon --legacy-watch io/api.js
+        ports:
+            - "3000:3000"
+        depends_on:
+            - db
+        environment:
+            - PGHOST=db
+            - PGDATABASE=postgres
+            - PGUSER=postgres
+        networks:
+            webnet:
+                aliases:
+                    - report_nodeapi
+
+
+    db:
+        image: postgres:9.6.2-alpine
+        ports: ["5433:5432"]
+        environment:
+           POSTGRES_USER: postgres
+           POSTGRES_DB: familycare
+        read_only: true
+        tmpfs:
+            - /tmp
+            - /var/run/postgresql
+        volumes:
+            - db:/var/lib/postgresql/data
+        networks:
+            webnet:
+                aliases:
+                    - db
+
+networks:
+    webnet:
+
+volumes:
+    db:

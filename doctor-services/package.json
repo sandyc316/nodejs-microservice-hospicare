@@ -1,0 +1,35 @@
+{
+  "name": "nodejsboilerplate",
+  "version": "0.0.1",
+  "description": "Nodejs basic microservice boilerplate",
+  "scripts": {
+    "test": "node_modules/mocha/bin/mocha --timeout 10000 --harmony --recursive tests"
+  },
+  "dependencies": {
+    "body-parser": "^1.4.3",
+    "co": "^3.1.0",
+    "co-express": "^1.0.0",
+    "co-fs": "^1.2.0",
+    "config": "^1.29.4",
+    "cookie-parser": "^1.4.3",
+    "dotenv": "^4.0.0",
+    "express": "^4.4.5",
+    "express-session": "^1.6.1",
+    "helmet": "^3.9.0",
+    "lodash": "^2.4.1",
+    "mime": "^1.2.11",
+    "morgan": "^1.9.0",
+    "multer": "^0.1.4",
+    "on-headers": "^1.0.0",
+    "qs": "^0.6.6",
+    "rbac2": "^1.0.5",
+    "request": "~2.40.0",
+    "response-time": "^2.0.1",
+    "serve-favicon": "^2.1.3",
+    "validator": "^3.16.0",
+    "winston": "^2.4.0"
+  },
+  "devDependencies": {
+    "mocha": "^1.20.1"
+  }
+}

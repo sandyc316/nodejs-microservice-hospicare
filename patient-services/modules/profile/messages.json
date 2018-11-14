@@ -1,0 +1,51 @@
+{
+   
+    "FIRST_NAME_REQUIRED": {
+        "message": "First name is required.",
+        "status": 405
+    },
+    "LAST_NAME_REQUIRED": {
+        "message": "Last name is required.",
+        "status": 405
+    },
+    "EMAIL_REQUIRED": {
+        "message": "Email is required.",
+        "status": 405
+    },
+    "INVALID_EMAIL_FORMAT": {
+        "message": "Invalid email format.",
+        "status": 422
+    },
+    "PHONE_REQUIRED": {
+        "message": "Phone number is required.",
+        "status": 405
+    },
+    "EMAIL_ALREADY_EXIST": {
+        "message": "Email already exists.",
+        "status": 405
+    },
+    "PROFILE_CREATED_SUCCESSFULLY": {
+        "message": "Your profile has been created successfully.",
+        "status": 200
+    },
+    "ADDRESS_ADDED_SUCCESSFULLY": {
+        "message": "Your address has been added successfully.",
+        "status": 200
+    },
+    "MEDICAL_PROFILE_ADDED_SUCCESSFULLY": {
+        "message": "Your medical profile has been updated successfully.",
+        "status": 200
+    },
+    "PATIENT_NOT_FOUND": {
+        "message": "Patient not found.",
+        "status": 422
+    },
+    "PROFILE_UPDATED": {
+        "message": "Patient profile has been successfully updated.",
+        "status": 200
+    },
+    "PROFILE_NOT_UPDATED": {
+        "message": "Patient profile is not updated.",
+        "status": 405
+    }
+}

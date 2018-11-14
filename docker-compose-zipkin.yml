@@ -1,0 +1,138 @@
+version: '3'
+
+services:
+    
+    app:
+        image: patient_nodeapi
+        #build: .
+        volumes:
+            - ./config:/opt/app/config
+            - ./io:/opt/app/io
+            - ./modules:/opt/app/modules
+            - ./package.json:/opt/app/package.json
+            - ./.env:/opt/app/.env
+            
+        command: nodemon --legacy-watch io/api.js
+        ports:
+            - "3001:3001"
+        depends_on:
+            - db
+            - fluentd
+        environment:
+            - PGHOST=db
+            - PGDATABASE=postgres
+            - PGUSER=postgres
+        # env_file:
+        #     - ./Docker/env
+        logging:
+            driver: "fluentd"
+            options:
+                fluentd-address: localhost:24224
+                tag: httpd.access
+        networks:
+            webnet:
+                aliases:
+                    - patient_nodeapi
+
+    db:
+        image: postgres:9.6.2-alpine
+        ports: ["5433:5432"]
+        environment:
+           POSTGRES_USER: postgres
+           POSTGRES_DB: familycare
+        read_only: true
+        tmpfs:
+            - /tmp
+            - /var/run/postgresql
+        volumes:
+            - db:/var/lib/postgresql/data
+        networks:
+            webnet:
+                aliases:
+                    - db
+
+    rabbit_mq:
+        image: rabbitmq:3.6
+        restart: "always"
+        ports:
+            - "15672"
+            - "5672"
+        environment:
+            - "RABBITMQ_DEFAULT_PASS=rabbitmq"
+            - "RABBITMQ_DEFAULT_USER=rabbitmq"
+            - "RABBITMQ_DEFAULT_VHOST=vhost"
+        networks:
+            webnet:
+                aliases:
+                    - rabbit
+
+    fluentd:
+        build: ./fluentd
+        volumes:
+            - ./fluentd/conf:/fluentd/etc
+        depends_on:
+            - "elasticsearch"
+        ports:
+            - "24224:24224"
+            - "24224:24224/udp"
+        networks:
+            webnet:
+                aliases:
+                    - fluentd
+
+    elasticsearch:
+        image: elasticsearch
+        # expose:
+        #     - 9200
+        ports:
+            - "9200:9200"
+        networks:
+            webnet:
+                aliases:
+                    - elasticsearch
+
+    kibana:
+        image: kibana
+        depends_on:
+            - "elasticsearch"
+        ports:
+            - "5601:5601"
+        networks:
+            webnet:
+                aliases:
+                    - kibana
+
+    # storage:
+    #     image: openzipkin/zipkin-mysql
+    #     container_name: mysql
+    #     networks:
+    #         webnet:
+    #             aliases:
+    #                 - mysql
+
+    # zipkin:
+    #     image: openzipkin/zipkin
+    #     container_name: zipkin
+    #     # Environment settings are defined here https://github.com/openzipkin/zipkin/tree/1.19.0/zipkin-server#environment-variables
+    #     environment:
+    #       - STORAGE_TYPE=mysql
+    #       - MYSQL_HOST=mysql
+    #     ports:
+    #       # Port used for the Zipkin UI and HTTP Api
+    #       - 9411:9411
+    #     depends_on:
+    #       - storage
+
+    #     networks:
+    #         webnet:
+    #             aliases:
+    #                 - zipkin
+
+
+
+networks:
+    webnet:
+
+volumes:
+    db:
+    # rabbit:

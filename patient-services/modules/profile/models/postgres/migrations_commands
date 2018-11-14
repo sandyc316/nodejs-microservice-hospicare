@@ -1,0 +1,12 @@
+
+
+// Migrations create
+node node_modules/node-pg-migrate/bin/node-pg-migrate -m modules/models/postgres/migrations/ create users
+
+
+// Migrations up
+DATABASE_URL=postgres://postgres:postgres@db:5432/familycare node node_modules/node-pg-migrate/bin/node-pg-migrate -m modules/models/postgres/migrations/ up
+
+
+// Migrations down
+DATABASE_URL=postgres://postgres:postgres@db:5432/familycare node node_modules/node-pg-migrate/bin/node-pg-migrate -m modules/models/postgres/migrations/ down

@@ -1,0 +1,34 @@
+{   
+    "PATIENT_REQUIRED": {
+        "message": "Patient is required.",
+        "status": 405
+    },
+    "SPECIALITY_REQUIRED": {
+        "message": "Speciality is required.",
+        "status": 405
+    },
+     "ADDRESS_REQUIRED": {
+        "message": "Address is required.",
+        "status": 405
+    },
+    "REASON_REQUIRED": {
+        "message": "Reason is required.",
+        "status": 405
+    },
+    "START_TIME_REQUIRED": {
+	    "message": "Start time is required.",
+	    "status": 405
+    },
+    "END_TIME_REQUIRED": {
+	    "message": "End time is required.",
+	    "status": 405
+    },
+    "CREATED_SUCCESSFULLY": {
+        "message": "Your booking has been created successfully.",
+        "status": 200
+    },
+    "UPDATED_SUCCESSFULLY": {
+        "message": "Your booking has been updated successfully.",
+        "status": 200
+    }
+}

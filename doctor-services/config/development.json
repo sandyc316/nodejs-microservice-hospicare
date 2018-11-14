@@ -1,0 +1,10 @@
+{
+	"app" : {
+		"baseurl"    : "http://localhost:3000",
+		"port"       : 3000,
+    	"dbName"     : "node_db"
+	},
+	"paths": {
+        "tmp"         : "/../io/_tmp"
+    }
+}

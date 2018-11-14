@@ -1,0 +1,74 @@
+{   
+    "PATIENT_REQUIRED": {
+        "message": "Patient is required.",
+        "status": 405
+    },
+    "DOCTOR_REQUIRED": {
+        "message": "Doctor is required.",
+        "status": 405
+    },
+    "HOSPITAL_REQUIRED": {
+        "message": "Hospital is required.",
+        "status": 405
+    },
+    "SPECIALITY_REQUIRED": {
+        "message": "Speciality is required.",
+        "status": 405
+    },
+    "CASE_REQUIRED": {
+        "message": "Case is required.",
+        "status": 405
+    },
+     "ADDRESS_REQUIRED": {
+        "message": "Address is required.",
+        "status": 405
+    },
+    "REASON_REQUIRED": {
+        "message": "Reason is required.",
+        "status": 405
+    },
+    "STATUS_REQUIRED": {
+        "message": "Status is required.",
+        "status": 405
+    },
+    "ADDED_SUCCESSFULLY": {
+        "message": "Your appointment has been created successfully.",
+        "status": 200
+    },
+    "UPDATED_SUCCESSFULLY": {
+        "message": "Your appointment has been updated successfully.",
+        "status": 200
+    },
+    "MEDICAL_PROFILE_ADDED_SUCCESSFULLY": {
+        "message": "Your medical profile has been updated successfully.",
+        "status": 200
+    },
+    "MEMBER_NOT_FOUND": {
+        "message": "Member not found.",
+        "status": 422
+    },
+    "MEMBER_UPDATED_SUCCESSFULLY" : {
+        "message": "Member details updated successfully.",
+        "status": 200
+    },
+    "DATE_REQUIRED": {
+        "message": "Appointment date is required.",
+        "status": 405
+    },
+    "START_DATE_REQUIRED": {
+        "message": "Start date is required.",
+        "status": 405
+    },
+    "END_DATE_REQUIRED": {
+        "message": "End date is required.",
+        "status": 405
+    },
+    "NOT_FOUND": {
+        "message": "Appointment is not available.",
+        "status": 405
+    },
+    "REPORT_NOT_FOUND": {
+        "message": "Report not found.",
+        "status": 405
+    }
+}

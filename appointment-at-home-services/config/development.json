@@ -1,0 +1,17 @@
+{
+	"app" : {
+		"baseurl"    : "http://localhost:3000",
+		"port"       : 3000,
+    	"dbName"     : "node_db",
+    	"repoType"   : "postgres"
+	},
+	"paths": {
+        "tmp"         : "/../io/_tmp"
+    },
+    "doctors" : {
+    	"getDoctorDetailsURL" : "http://doctor_app:3000/doctors/435634trfew"
+    },
+    "appointment" : {
+        "createAppointmentURL" : "http://appointment_app:3000/appointment"
+    }
+}

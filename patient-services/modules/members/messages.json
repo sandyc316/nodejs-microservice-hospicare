@@ -1,0 +1,34 @@
+{   
+    "FIRST_NAME_REQUIRED": {
+        "message": "First name is required.",
+        "status": 405
+    },
+    "LAST_NAME_REQUIRED": {
+        "message": "Last name is required.",
+        "status": 405
+    },
+    "RELATIONSHIP_REQUIRED": {
+        "message": "Relationship is required.",
+        "status": 405
+    },
+    "INVALID_RELATIONSHIP": {
+        "message": "Relationship is not valid.",
+        "status": 422
+    },
+    "MEMBER_ADDED_SUCCESSFULLY": {
+        "message": "Your member has been added successfully.",
+        "status": 200
+    },
+    "MEDICAL_PROFILE_ADDED_SUCCESSFULLY": {
+        "message": "Your medical profile has been updated successfully.",
+        "status": 200
+    },
+    "MEMBER_NOT_FOUND": {
+        "message": "Member not found.",
+        "status": 422
+    },
+    "MEMBER_UPDATED_SUCCESSFULLY" : {
+        "message": "Member details updated successfully.",
+        "status": 200
+    }
+}
